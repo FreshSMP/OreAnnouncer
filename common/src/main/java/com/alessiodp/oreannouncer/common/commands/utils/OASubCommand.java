@@ -34,7 +34,7 @@ public abstract class OASubCommand extends ADPSubCommand  {
 			ret = ((OreAnnouncerPlugin) plugin).getPlayerManager().getPlayer(targetUser.getUUID());
 		} else {
 			Set<UUID> targetPlayersUuid = LLAPIHandler.getPlayerByName(playerName);
-			if (targetPlayersUuid.size() > 0) {
+			if (!targetPlayersUuid.isEmpty()) {
 				ret = ((OreAnnouncerPlugin) plugin).getPlayerManager().getPlayer(targetPlayersUuid.iterator().next());
 			}
 		}

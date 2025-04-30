@@ -234,7 +234,7 @@ public class CommandLog extends OASubCommand {
 			));
 		}
 		
-		if (blocks.size() > 0) {
+		if (!blocks.isEmpty()) {
 			for (BlockFound bf : blocks) {
 				OABlockImpl b = Blocks.searchBlock(bf.getMaterialName());
 				if (b != null && b.isEnabled()) {

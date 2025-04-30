@@ -17,6 +17,7 @@ import com.alessiodp.oreannouncer.common.configuration.data.Messages;
 import com.alessiodp.oreannouncer.common.players.objects.OAPlayerImpl;
 import com.alessiodp.oreannouncer.common.storage.OADatabaseManager;
 import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +77,7 @@ public class CommandTop extends OASubCommand {
 	}
 	
 	@Override
-	public String getSyntaxForUser(User user) {
+	public @NotNull String getSyntaxForUser(User user) {
 		if (!user.hasPermission(OreAnnouncerPermission.USER_TOP))
 			return syntaxBase;
 		return syntax;
@@ -293,7 +294,7 @@ public class CommandTop extends OASubCommand {
 				.replace("%page%", Integer.toString(selectedPage))
 				.replace("%maxpages%", Integer.toString(maxPages)));
 		
-		if (players.size() > 0) {
+		if (!players.isEmpty()) {
 			players.forEach((id, number) -> {
 				OAPlayerImpl p = ((OreAnnouncerPlugin) plugin).getPlayerManager().getPlayer(id);
 				sendMessage(sender, player, ((OreAnnouncerPlugin) plugin).getMessageUtils().convertPlayerPlaceholders(Messages.CMD_TOP_FORMATPLAYER

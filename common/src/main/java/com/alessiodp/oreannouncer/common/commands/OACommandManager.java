@@ -5,6 +5,7 @@ import com.alessiodp.core.common.commands.CommandManager;
 import com.alessiodp.core.common.commands.utils.CommandData;
 import com.alessiodp.oreannouncer.common.commands.utils.OACommandData;
 import com.alessiodp.oreannouncer.common.configuration.data.ConfigMain;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 
@@ -20,7 +21,7 @@ public abstract class OACommandManager extends CommandManager {
 	}
 	
 	@Override
-	public CommandData initializeCommandData() {
+	public @NotNull CommandData initializeCommandData() {
 		return new OACommandData();
 	}
 }

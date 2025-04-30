@@ -191,14 +191,11 @@ public class OADatabaseManager extends DatabaseManager {
 		DESTROY, FOUND;
 		
 		public static ValueType getType(String type) {
-			switch (CommonUtils.toLowerCase(type)) {
-				case "destroy":
-					return DESTROY;
-				case "found":
-					return FOUND;
-				default:
-					return null;
-			}
+            return switch (CommonUtils.toLowerCase(type)) {
+                case "destroy" -> DESTROY;
+                case "found" -> FOUND;
+                default -> null;
+            };
 		}
 		
 		public static ValueType parse(String type) {

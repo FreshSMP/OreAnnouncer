@@ -15,6 +15,7 @@ import com.alessiodp.oreannouncer.common.configuration.data.ConfigMain;
 import com.alessiodp.oreannouncer.common.configuration.data.Messages;
 import com.alessiodp.oreannouncer.common.players.objects.OAPlayerImpl;
 import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -73,19 +74,19 @@ public class CommandStats extends OASubCommand {
 	}
 	
 	@Override
-	public String getSyntaxForUser(User user) {
+	public @NotNull String getSyntaxForUser(User user) {
 		if (user.hasPermission(OreAnnouncerPermission.ADMIN_STATS_OTHER))
 			return user.hasPermission(OreAnnouncerPermission.USER_TOP) ? syntaxOthers: syntaxOthersBase;
 		return user.hasPermission(OreAnnouncerPermission.USER_TOP) ? syntax : syntaxBase;
 	}
 	
 	@Override
-	public String getConsoleSyntax() {
+	public @NotNull String getConsoleSyntax() {
 		return syntaxConsole;
 	}
 	
 	@Override
-	public boolean preRequisites(CommandData commandData) {
+	public boolean preRequisites(@NotNull CommandData commandData) {
 		return handlePreRequisitesWithPermission(commandData);
 	}
 	
@@ -180,7 +181,7 @@ public class CommandStats extends OASubCommand {
 		
 		sendMessage(sender, player, ((OreAnnouncerPlugin) plugin).getMessageUtils().convertPlayerPlaceholders(Messages.CMD_STATS_HEADER, targetPlayer));
 		
-		if (blocks.size() > 0) {
+		if (!blocks.isEmpty()) {
 			Comparator<Map.Entry<OABlockImpl, Integer>> sorter = Map.Entry.comparingByValue(Comparator.reverseOrder());
 			if (ConfigMain.STATS_ORDER_BY.equalsIgnoreCase("priority")) {
 				sorter = Comparator.comparingInt(b -> b.getKey().getPriority());

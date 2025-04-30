@@ -35,7 +35,8 @@ public abstract class OAPlayerImpl implements OAPlayer {
 	@Getter private boolean whitelisted;
 	@EqualsAndHashCode.Exclude @Getter private String name;
 	
-	@EqualsAndHashCode.Exclude @ToString.Exclude private boolean accessible = false;
+	@Setter
+    @EqualsAndHashCode.Exclude @ToString.Exclude private boolean accessible = false;
 	
 	protected OAPlayerImpl(OreAnnouncerPlugin plugin, UUID uuid) {
 		this.plugin = plugin;
@@ -46,12 +47,8 @@ public abstract class OAPlayerImpl implements OAPlayer {
 		if (name == null || name.isEmpty())
 			name = LLAPIHandler.getPlayerName(playerUUID); // Use LastLoginAPI to get the name
 	}
-	
-	public void setAccessible(boolean accessible) {
-		this.accessible = accessible;
-	}
-	
-	public CompletableFuture<Void> updatePlayer() {
+
+    public CompletableFuture<Void> updatePlayer() {
 		return plugin.getDatabaseManager().updatePlayer(this);
 	}
 	

@@ -343,16 +343,10 @@ public class OASQLDispatcher extends SQLDispatcher implements IOADatabase {
 	
 	@Override
 	protected int getBackwardMigration() {
-		switch (storageType) {
-			case H2:
-			case POSTGRESQL:
-				return -1;
-			case MARIADB:
-			case MYSQL:
-			case SQLITE:
-			default:
-				return 0;
-		}
+        return switch (storageType) {
+            case H2, POSTGRESQL -> -1;
+            default -> 0;
+        };
 	}
 	
 	private List<String> getEnabledMaterials(OABlock block, List<String> materialsBlacklist) {

@@ -182,98 +182,105 @@ public enum OAPlaceholder {
 		Matcher matcher;
 		if (player != null) {
 			OABlockImpl tempBlock = null;
-			switch (this) {
-				case TOP_PLAYER_BY_DESTROY_NUMBER:
-				case TOP_PLAYER_BY_DESTROY_NUMBER_PLACEHOLDER:
-					return getTopPlayerBy(identifier, emptyPlaceholder, PATTERN_TOP_PLAYER_BY_DESTROY, OADatabaseManager.ValueType.DESTROY);
-				case TOP_PLAYER_BY_DESTROY_BLOCK_NUMBER:
-				case TOP_PLAYER_BY_DESTROY_BLOCK_NUMBER_PLACEHOLDER:
-					return getTopPlayerPerBlockBy(identifier, emptyPlaceholder, PATTERN_TOP_PLAYER_BY_DESTROY_BLOCK, OADatabaseManager.ValueType.DESTROY);
-				case TOP_PLAYER_BY_FOUND_NUMBER:
-				case TOP_PLAYER_BY_FOUND_NUMBER_PLACEHOLDER:
-					return getTopPlayerBy(identifier, emptyPlaceholder, PATTERN_TOP_PLAYER_BY_FOUND, OADatabaseManager.ValueType.FOUND);
-				case TOP_PLAYER_BY_FOUND_BLOCK_NUMBER:
-				case TOP_PLAYER_BY_FOUND_BLOCK_NUMBER_PLACEHOLDER:
-					return getTopPlayerPerBlockBy(identifier, emptyPlaceholder, PATTERN_TOP_PLAYER_BY_FOUND_BLOCK, OADatabaseManager.ValueType.FOUND);
-				case TOP_PLAYERS_TOTAL_BY_DESTROY:
-				case TOP_PLAYERS_TOTAL_BLOCK_BY_DESTROY:
-					matcher = PATTERN_TOP_PLAYERS_TOTAL_BLOCK_BY_DESTROY.matcher(identifier);
-					if (matcher.find())
-						tempBlock = Blocks.searchBlock(matcher.group(1));
-					return Integer.toString(plugin.getDatabaseManager().getTopPlayersNumber(OADatabaseManager.ValueType.DESTROY, tempBlock));
-				case TOP_PLAYERS_TOTAL_BY_FOUND:
-				case TOP_PLAYERS_TOTAL_BLOCK_BY_FOUND:
-					matcher = PATTERN_TOP_PLAYERS_TOTAL_BLOCK_BY_FOUND.matcher(identifier);
-					if (matcher.find())
-						tempBlock = Blocks.searchBlock(matcher.group(1));
-					return Integer.toString(plugin.getDatabaseManager().getTopPlayersNumber(OADatabaseManager.ValueType.FOUND, tempBlock));
-				case TOTAL_BY_DESTROY:
-				case TOTAL_BLOCK_BY_DESTROY:
-					matcher = PATTERN_TOTAL_BLOCK_BY_DESTROY.matcher(identifier);
-					if (matcher.find())
-						tempBlock = Blocks.searchBlock(matcher.group(1));
-					return Integer.toString(plugin.getDatabaseManager().getTotalDestroy(tempBlock));
-				case TOTAL_BY_FOUND:
-				case TOTAL_BLOCK_BY_FOUND:
-					matcher = PATTERN_TOTAL_BLOCK_BY_FOUND.matcher(identifier);
-					if (matcher.find())
-						tempBlock = Blocks.searchBlock(matcher.group(1));
-					return Integer.toString(plugin.getDatabaseManager().getTotalFound(tempBlock));
-				case PLAYER_DESTROY:
-				case PLAYER_DESTROY_BLOCK:
-					matcher = PATTERN_DESTROY_BLOCK.matcher(identifier);
-					if (matcher.find()) {
-						tempBlock = Blocks.searchBlock(matcher.group(1));
-					}
-					return Integer.toString(((OreAnnouncerPlugin) OreAnnouncerPlugin.getInstance()).getPlayerManager().getTotalBlocksDestroy(player, tempBlock));
-				case PLAYER_FOUND:
-				case PLAYER_FOUND_BLOCK:
-					matcher = PATTERN_FOUND_BLOCK.matcher(identifier);
-					if (matcher.find()) {
-						tempBlock = Blocks.searchBlock(matcher.group(1));
-					}
-					return Integer.toString(plugin.getPlayerManager().getTotalBlocksFound(player, tempBlock, 0));
-				case PLAYER_FOUNDIN_RANGE:
-				case PLAYER_FOUNDIN_RANGE_BLOCK:
-					matcher = PATTERN_FOUNDIN_RANGE_BLOCK.matcher(identifier);
-					if (matcher.find()) {
-						try {
-							long sinceTimestamp = Long.parseLong(matcher.group(1));
-							if (matcher.groupCount() > 2 && matcher.group(3) != null) {
-								tempBlock = Blocks.searchBlock(matcher.group(3));
-							}
-							return Integer.toString(plugin.getPlayerManager().getTotalBlocksFound(player, tempBlock, sinceTimestamp));
-						} catch (Exception ignored) {}
-					}
-					return "0";
-				case PLAYER_DISPLAY_NAME:
-					User user = plugin.getPlayer(player.getPlayerUUID());
-					return user != null ? user.getDisplayName() : player.getName();
-				case PLAYER_ID:
-					return player.getPlayerUUID().toString();
-				case PLAYER_NAME:
-					return player.getName();
-				case PLAYER_TOP_BY_DESTROY:
-				case PLAYER_TOP_BY_DESTROY_BLOCK:
-					matcher = PATTERN_PLAYER_TOP.matcher(identifier);
-					if (matcher.find() && matcher.group(2) != null) {
-						tempBlock = Blocks.searchBlock(matcher.group(2));
-					}
-					return Integer.toString(plugin.getDatabaseManager().getTopPlayerPosition(player.getPlayerUUID(), OADatabaseManager.ValueType.DESTROY, tempBlock));
-				case PLAYER_TOP_BY_FOUND:
-				case PLAYER_TOP_BY_FOUND_BLOCK:
-					matcher = PATTERN_PLAYER_TOP.matcher(identifier);
-					if (matcher.find() && matcher.group(2) != null) {
-						tempBlock = Blocks.searchBlock(matcher.group(2));
-					}
-					return Integer.toString(plugin.getDatabaseManager().getTopPlayerPosition(player.getPlayerUUID(), OADatabaseManager.ValueType.FOUND, tempBlock));
-				case SERVER_NAME:
-					return plugin.getServerName();
-				case SERVER_ID:
-					return plugin.getServerId();
-				default:
-					return null;
-			}
+            switch (this) {
+                case TOP_PLAYER_BY_DESTROY_NUMBER, TOP_PLAYER_BY_DESTROY_NUMBER_PLACEHOLDER -> {
+                    return getTopPlayerBy(identifier, emptyPlaceholder, PATTERN_TOP_PLAYER_BY_DESTROY, OADatabaseManager.ValueType.DESTROY);
+                }
+                case TOP_PLAYER_BY_DESTROY_BLOCK_NUMBER, TOP_PLAYER_BY_DESTROY_BLOCK_NUMBER_PLACEHOLDER -> {
+                    return getTopPlayerPerBlockBy(identifier, emptyPlaceholder, PATTERN_TOP_PLAYER_BY_DESTROY_BLOCK, OADatabaseManager.ValueType.DESTROY);
+                }
+                case TOP_PLAYER_BY_FOUND_NUMBER, TOP_PLAYER_BY_FOUND_NUMBER_PLACEHOLDER -> {
+                    return getTopPlayerBy(identifier, emptyPlaceholder, PATTERN_TOP_PLAYER_BY_FOUND, OADatabaseManager.ValueType.FOUND);
+                }
+                case TOP_PLAYER_BY_FOUND_BLOCK_NUMBER, TOP_PLAYER_BY_FOUND_BLOCK_NUMBER_PLACEHOLDER -> {
+                    return getTopPlayerPerBlockBy(identifier, emptyPlaceholder, PATTERN_TOP_PLAYER_BY_FOUND_BLOCK, OADatabaseManager.ValueType.FOUND);
+                }
+                case TOP_PLAYERS_TOTAL_BY_DESTROY, TOP_PLAYERS_TOTAL_BLOCK_BY_DESTROY -> {
+                    matcher = PATTERN_TOP_PLAYERS_TOTAL_BLOCK_BY_DESTROY.matcher(identifier);
+                    if (matcher.find())
+                        tempBlock = Blocks.searchBlock(matcher.group(1));
+                    return Integer.toString(plugin.getDatabaseManager().getTopPlayersNumber(OADatabaseManager.ValueType.DESTROY, tempBlock));
+                }
+                case TOP_PLAYERS_TOTAL_BY_FOUND, TOP_PLAYERS_TOTAL_BLOCK_BY_FOUND -> {
+                    matcher = PATTERN_TOP_PLAYERS_TOTAL_BLOCK_BY_FOUND.matcher(identifier);
+                    if (matcher.find())
+                        tempBlock = Blocks.searchBlock(matcher.group(1));
+                    return Integer.toString(plugin.getDatabaseManager().getTopPlayersNumber(OADatabaseManager.ValueType.FOUND, tempBlock));
+                }
+                case TOTAL_BY_DESTROY, TOTAL_BLOCK_BY_DESTROY -> {
+                    matcher = PATTERN_TOTAL_BLOCK_BY_DESTROY.matcher(identifier);
+                    if (matcher.find())
+                        tempBlock = Blocks.searchBlock(matcher.group(1));
+                    return Integer.toString(plugin.getDatabaseManager().getTotalDestroy(tempBlock));
+                }
+                case TOTAL_BY_FOUND, TOTAL_BLOCK_BY_FOUND -> {
+                    matcher = PATTERN_TOTAL_BLOCK_BY_FOUND.matcher(identifier);
+                    if (matcher.find())
+                        tempBlock = Blocks.searchBlock(matcher.group(1));
+                    return Integer.toString(plugin.getDatabaseManager().getTotalFound(tempBlock));
+                }
+                case PLAYER_DESTROY, PLAYER_DESTROY_BLOCK -> {
+                    matcher = PATTERN_DESTROY_BLOCK.matcher(identifier);
+                    if (matcher.find()) {
+                        tempBlock = Blocks.searchBlock(matcher.group(1));
+                    }
+                    return Integer.toString(((OreAnnouncerPlugin) OreAnnouncerPlugin.getInstance()).getPlayerManager().getTotalBlocksDestroy(player, tempBlock));
+                }
+                case PLAYER_FOUND, PLAYER_FOUND_BLOCK -> {
+                    matcher = PATTERN_FOUND_BLOCK.matcher(identifier);
+                    if (matcher.find()) {
+                        tempBlock = Blocks.searchBlock(matcher.group(1));
+                    }
+                    return Integer.toString(plugin.getPlayerManager().getTotalBlocksFound(player, tempBlock, 0));
+                }
+                case PLAYER_FOUNDIN_RANGE, PLAYER_FOUNDIN_RANGE_BLOCK -> {
+                    matcher = PATTERN_FOUNDIN_RANGE_BLOCK.matcher(identifier);
+                    if (matcher.find()) {
+                        try {
+                            long sinceTimestamp = Long.parseLong(matcher.group(1));
+                            if (matcher.groupCount() > 2 && matcher.group(3) != null) {
+                                tempBlock = Blocks.searchBlock(matcher.group(3));
+                            }
+                            return Integer.toString(plugin.getPlayerManager().getTotalBlocksFound(player, tempBlock, sinceTimestamp));
+                        } catch (Exception ignored) {
+                        }
+                    }
+                    return "0";
+                }
+                case PLAYER_DISPLAY_NAME -> {
+                    User user = plugin.getPlayer(player.getPlayerUUID());
+                    return user != null ? user.getDisplayName() : player.getName();
+                }
+                case PLAYER_ID -> {
+                    return player.getPlayerUUID().toString();
+                }
+                case PLAYER_NAME -> {
+                    return player.getName();
+                }
+                case PLAYER_TOP_BY_DESTROY, PLAYER_TOP_BY_DESTROY_BLOCK -> {
+                    matcher = PATTERN_PLAYER_TOP.matcher(identifier);
+                    if (matcher.find() && matcher.group(2) != null) {
+                        tempBlock = Blocks.searchBlock(matcher.group(2));
+                    }
+                    return Integer.toString(plugin.getDatabaseManager().getTopPlayerPosition(player.getPlayerUUID(), OADatabaseManager.ValueType.DESTROY, tempBlock));
+                }
+                case PLAYER_TOP_BY_FOUND, PLAYER_TOP_BY_FOUND_BLOCK -> {
+                    matcher = PATTERN_PLAYER_TOP.matcher(identifier);
+                    if (matcher.find() && matcher.group(2) != null) {
+                        tempBlock = Blocks.searchBlock(matcher.group(2));
+                    }
+                    return Integer.toString(plugin.getDatabaseManager().getTopPlayerPosition(player.getPlayerUUID(), OADatabaseManager.ValueType.FOUND, tempBlock));
+                }
+                case SERVER_NAME -> {
+                    return plugin.getServerName();
+                }
+                case SERVER_ID -> {
+                    return plugin.getServerId();
+                }
+                default -> {
+                    return null;
+                }
+            }
 		}
 		return null;
 	}

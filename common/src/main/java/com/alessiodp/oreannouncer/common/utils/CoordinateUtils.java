@@ -37,7 +37,7 @@ public class CoordinateUtils {
 				for (int c=0; c < ConfigMain.ALERTS_COORDINATES_HIDE_COUNT; c++) {
 					ArrayList<Coordinate> visibleCoordinates = getVisibleCoordinates(coords);
 					
-					if (visibleCoordinates.size() == 0)
+					if (visibleCoordinates.isEmpty())
 						break;
 					
 					// Randomly choose one of them

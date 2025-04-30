@@ -55,76 +55,34 @@ public abstract class MessageUtils {
 			while (matcher.find()) {
 				String identifier = matcher.group(1);
 				// Match basic placeholders
-				switch (CommonUtils.toLowerCase(identifier)) {
-					case "%material%":
-					case "%material_name%":
-						ret = ret.replace(identifier, block.getMaterialName());
-						break;
-					case "%enabled%":
-						ret = ret.replace(identifier, formatEnabledDisabled(block.isEnabled()));
-						break;
-					case "%display_name%":
-						ret = ret.replace(identifier, block.getDisplayName());
-						break;
-					case "%display_color%":
-						ret = ret.replace(identifier, block.getDisplayColor() != null ? Color.formatColorByNameOrText(Color.translateAlternateColorCodes(block.getDisplayColor())) : "");
-						break;
-					case "%alert_users%":
-						ret = ret.replace(identifier, formatOnOff(block.isAlertingUsers()));
-						break;
-					case "%alert_admins%":
-						ret = ret.replace(identifier, formatOnOff(block.isAlertingAdmins()));
-						break;
-					case "%name_singular%":
-						ret = ret.replace(identifier, block.getSingularName());
-						break;
-					case "%name_plural%":
-						ret = ret.replace(identifier, block.getPluralName());
-						break;
-					case "%count_number%":
-						ret = ret.replace(identifier, Integer.toString(block.getCountNumber()));
-						break;
-					case "%count_time%":
-						ret = ret.replace(identifier, Integer.toString(block.getCountTime()));
-						break;
-					case "%message_user%":
-						ret = ret.replace(identifier, block.getMessageUser());
-						break;
-					case "%message_admin%":
-						ret = ret.replace(identifier, block.getMessageAdmin());
-						break;
-					case "%message_console%":
-						ret = ret.replace(identifier, block.getMessageConsole());
-						break;
-					case "%message_count_user%":
-						ret = ret.replace(identifier, block.getCountMessageUser());
-						break;
-					case "%message_count_admin%":
-						ret = ret.replace(identifier, block.getCountMessageAdmin());
-						break;
-					case "%message_count_console%":
-						ret = ret.replace(identifier, block.getCountMessageConsole());
-						break;
-					case "%sound%":
-						ret = ret.replace(identifier, block.getSound());
-						break;
-					case "%light_level%":
-						ret = ret.replace(identifier, Integer.toString(block.getLightLevel()));
-						break;
-					case "%height_level%":
-						ret = ret.replace(identifier, Integer.toString(block.getHeightLevel()));
-						break;
-					case "%count_on_destroy%":
-						ret = ret.replace(identifier, formatOnOff(block.isCountingOnDestroy()));
-						break;
-					case "%tnt%":
-						ret = ret.replace(identifier, formatOnOff(block.isTNTEnabled()));
-						break;
-					case "%priority%":
-						ret = ret.replace(identifier, Integer.toString(block.getPriority()));
-						break;
-					default: // Nothing to do
-				}
+                switch (CommonUtils.toLowerCase(identifier)) {
+                    case "%material%", "%material_name%" -> ret = ret.replace(identifier, block.getMaterialName());
+                    case "%enabled%" -> ret = ret.replace(identifier, formatEnabledDisabled(block.isEnabled()));
+                    case "%display_name%" -> ret = ret.replace(identifier, block.getDisplayName());
+                    case "%display_color%" ->
+                            ret = ret.replace(identifier, block.getDisplayColor() != null ? Color.formatColorByNameOrText(Color.translateAlternateColorCodes(block.getDisplayColor())) : "");
+                    case "%alert_users%" -> ret = ret.replace(identifier, formatOnOff(block.isAlertingUsers()));
+                    case "%alert_admins%" -> ret = ret.replace(identifier, formatOnOff(block.isAlertingAdmins()));
+                    case "%name_singular%" -> ret = ret.replace(identifier, block.getSingularName());
+                    case "%name_plural%" -> ret = ret.replace(identifier, block.getPluralName());
+                    case "%count_number%" -> ret = ret.replace(identifier, Integer.toString(block.getCountNumber()));
+                    case "%count_time%" -> ret = ret.replace(identifier, Integer.toString(block.getCountTime()));
+                    case "%message_user%" -> ret = ret.replace(identifier, block.getMessageUser());
+                    case "%message_admin%" -> ret = ret.replace(identifier, block.getMessageAdmin());
+                    case "%message_console%" -> ret = ret.replace(identifier, block.getMessageConsole());
+                    case "%message_count_user%" -> ret = ret.replace(identifier, block.getCountMessageUser());
+                    case "%message_count_admin%" -> ret = ret.replace(identifier, block.getCountMessageAdmin());
+                    case "%message_count_console%" -> ret = ret.replace(identifier, block.getCountMessageConsole());
+                    case "%sound%" -> ret = ret.replace(identifier, block.getSound());
+                    case "%light_level%" -> ret = ret.replace(identifier, Integer.toString(block.getLightLevel()));
+                    case "%height_level%" -> ret = ret.replace(identifier, Integer.toString(block.getHeightLevel()));
+                    case "%count_on_destroy%" ->
+                            ret = ret.replace(identifier, formatOnOff(block.isCountingOnDestroy()));
+                    case "%tnt%" -> ret = ret.replace(identifier, formatOnOff(block.isTNTEnabled()));
+                    case "%priority%" -> ret = ret.replace(identifier, Integer.toString(block.getPriority()));
+                    default -> {
+                    }
+                }
 			}
 		}
 		return ret;
@@ -137,79 +95,39 @@ public abstract class MessageUtils {
 			while (matcher.find()) {
 				String identifier = matcher.group(1);
 				// Match basic placeholders
-				switch (CommonUtils.toLowerCase(identifier)) {
-					case "%material%":
-					case "%material_name%":
-						ret = ret.replace(identifier, block.getMaterialName());
-						break;
-					case "%enabled%":
-						ret = ret.replace(identifier, formatEnabledDisabled(block.isEnabled()));
-						break;
-					case "%display_name%":
-						ret = ret.replace(identifier, formatText(block.getDisplayName()));
-						break;
-					case "%display_color%":
-						ret = ret.replace(identifier, formatText(block.getDisplayColor() != null ? Color.formatColorNamesByNameOrText(Color.translateAlternateColorCodes(block.getDisplayColor())) : ""));
-						break;
-					case "%display_color_code%":
-						ret = ret.replace(identifier, block.getDisplayColor() != null ? Color.formatColorByNameOrText(Color.translateAlternateColorCodes(block.getDisplayColor())) : "");
-						break;
-					case "%alert_users%":
-						ret = ret.replace(identifier, formatOnOff(block.isAlertingUsers()));
-						break;
-					case "%alert_admins%":
-						ret = ret.replace(identifier, formatOnOff(block.isAlertingAdmins()));
-						break;
-					case "%name_singular%":
-						ret = ret.replace(identifier, formatText(block.getSingularName()));
-						break;
-					case "%name_plural%":
-						ret = ret.replace(identifier, formatText(block.getPluralName()));
-						break;
-					case "%count_number%":
-						ret = ret.replace(identifier, formatNumber(block.getCountNumber()));
-						break;
-					case "%count_time%":
-						ret = ret.replace(identifier, formatNumber(block.getCountTime()));
-						break;
-					case "%message_user%":
-						ret = ret.replace(identifier, formatText(block.getMessageUser()));
-						break;
-					case "%message_admin%":
-						ret = ret.replace(identifier, formatText(block.getMessageAdmin()));
-						break;
-					case "%message_console%":
-						ret = ret.replace(identifier, formatText(block.getMessageConsole()));
-						break;
-					case "%message_count_user%":
-						ret = ret.replace(identifier, formatText(block.getCountMessageUser()));
-						break;
-					case "%message_count_admin%":
-						ret = ret.replace(identifier, formatText(block.getCountMessageAdmin()));
-						break;
-					case "%message_count_console%":
-						ret = ret.replace(identifier, formatText(block.getCountMessageConsole()));
-						break;
-					case "%sound%":
-						ret = ret.replace(identifier, formatText(block.getSound()));
-						break;
-					case "%light_level%":
-						ret = ret.replace(identifier, formatNumber(block.getLightLevel()));
-						break;
-					case "%height_level%":
-						ret = ret.replace(identifier, formatNumber(block.getHeightLevel()));
-						break;
-					case "%count_on_destroy%":
-						ret = ret.replace(identifier, formatOnOff(block.isCountingOnDestroy()));
-						break;
-					case "%tnt%":
-						ret = ret.replace(identifier, formatOnOff(block.isTNTEnabled()));
-						break;
-					case "%priority%":
-						ret = ret.replace(identifier, formatNumber(block.getPriority()));
-						break;
-					default: // Nothing to do
-				}
+                switch (CommonUtils.toLowerCase(identifier)) {
+                    case "%material%", "%material_name%" -> ret = ret.replace(identifier, block.getMaterialName());
+                    case "%enabled%" -> ret = ret.replace(identifier, formatEnabledDisabled(block.isEnabled()));
+                    case "%display_name%" -> ret = ret.replace(identifier, formatText(block.getDisplayName()));
+                    case "%display_color%" ->
+                            ret = ret.replace(identifier, formatText(block.getDisplayColor() != null ? Color.formatColorNamesByNameOrText(Color.translateAlternateColorCodes(block.getDisplayColor())) : ""));
+                    case "%display_color_code%" ->
+                            ret = ret.replace(identifier, block.getDisplayColor() != null ? Color.formatColorByNameOrText(Color.translateAlternateColorCodes(block.getDisplayColor())) : "");
+                    case "%alert_users%" -> ret = ret.replace(identifier, formatOnOff(block.isAlertingUsers()));
+                    case "%alert_admins%" -> ret = ret.replace(identifier, formatOnOff(block.isAlertingAdmins()));
+                    case "%name_singular%" -> ret = ret.replace(identifier, formatText(block.getSingularName()));
+                    case "%name_plural%" -> ret = ret.replace(identifier, formatText(block.getPluralName()));
+                    case "%count_number%" -> ret = ret.replace(identifier, formatNumber(block.getCountNumber()));
+                    case "%count_time%" -> ret = ret.replace(identifier, formatNumber(block.getCountTime()));
+                    case "%message_user%" -> ret = ret.replace(identifier, formatText(block.getMessageUser()));
+                    case "%message_admin%" -> ret = ret.replace(identifier, formatText(block.getMessageAdmin()));
+                    case "%message_console%" -> ret = ret.replace(identifier, formatText(block.getMessageConsole()));
+                    case "%message_count_user%" ->
+                            ret = ret.replace(identifier, formatText(block.getCountMessageUser()));
+                    case "%message_count_admin%" ->
+                            ret = ret.replace(identifier, formatText(block.getCountMessageAdmin()));
+                    case "%message_count_console%" ->
+                            ret = ret.replace(identifier, formatText(block.getCountMessageConsole()));
+                    case "%sound%" -> ret = ret.replace(identifier, formatText(block.getSound()));
+                    case "%light_level%" -> ret = ret.replace(identifier, formatNumber(block.getLightLevel()));
+                    case "%height_level%" -> ret = ret.replace(identifier, formatNumber(block.getHeightLevel()));
+                    case "%count_on_destroy%" ->
+                            ret = ret.replace(identifier, formatOnOff(block.isCountingOnDestroy()));
+                    case "%tnt%" -> ret = ret.replace(identifier, formatOnOff(block.isTNTEnabled()));
+                    case "%priority%" -> ret = ret.replace(identifier, formatNumber(block.getPriority()));
+                    default -> {
+                    }
+                }
 			}
 		}
 		return ret;

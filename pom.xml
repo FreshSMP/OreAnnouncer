@@ -60,40 +60,41 @@
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>8</java.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		
-		<maven.compiler.version>3.10.1</maven.compiler.version>
-		<maven.deploy.version>3.0.0</maven.deploy.version>
-		<maven.javadoc-plugin.version>3.4.1</maven.javadoc-plugin.version>
-		<maven.shade.version>3.4.1</maven.shade.version>
-		<maven.surefire.version>3.0.0-M7</maven.surefire.version>
-		<maven.versions.version>2.12.0</maven.versions.version>
+		<maven.compiler.version>3.14.0</maven.compiler.version>
+		<maven.deploy.version>3.1.4</maven.deploy.version>
+		<maven.javadoc-plugin.version>3.11.2</maven.javadoc-plugin.version>
+		<maven.shade.version>3.6.0</maven.shade.version>
+		<maven.surefire.version>3.5.3</maven.surefire.version>
+		<maven.versions.version>2.18.0</maven.versions.version>
 		
 		<!-- Dev libraries -->
-		<dev.annotations>23.1.0</dev.annotations>
-		<dev.lombok>1.18.24</dev.lombok>
-		<dev.mockito>4.11.0</dev.mockito>
-		<dev.junit>5.9.1</dev.junit>
+		<dev.annotations>26.0.2</dev.annotations>
+		<dev.lombok>1.18.38</dev.lombok>
+		<dev.mockito>5.2.0</dev.mockito>
+		<dev.junit>5.12.2</dev.junit>
+		<dev.bytebuddy>1.17.5</dev.bytebuddy>
 		
 		<libs.adpcore>1.8.10</libs.adpcore>
-		<libs.api.spigot>1.20.1-R0.1-SNAPSHOT</libs.api.spigot>
-		<libs.api.bungeecord>1.20-R0.1-SNAPSHOT</libs.api.bungeecord>
+		<libs.api.paper>1.21.4-R0.1-SNAPSHOT</libs.api.paper>
+		<libs.api.bungeecord>1.21-R0.1-SNAPSHOT</libs.api.bungeecord>
 		<!-- ADP Core Test Libraries -->
-		<libs.h2>1.4.200</libs.h2>
-		<libs.hikaricp>5.0.1</libs.hikaricp>
-		<libs.mariadb>3.1.0</libs.mariadb>
-		<libs.mysql>8.0.31</libs.mysql>
-		<libs.postgresql>42.5.1</libs.postgresql>
-		<libs.sqlite>3.40.0.0</libs.sqlite>
+		<libs.h2>2.3.232</libs.h2>
+		<libs.hikaricp>6.3.0</libs.hikaricp>
+		<libs.mariadb>3.5.3</libs.mariadb>
+		<libs.mysql>8.0.33</libs.mysql>
+		<libs.postgresql>42.7.5</libs.postgresql>
+		<libs.sqlite>3.49.1.0</libs.sqlite>
 		
 		<!-- External plugins -->
-		<libs.discordsrv>1.27.0-SNAPSHOT</libs.discordsrv>
+		<libs.discordsrv>1.29.0</libs.discordsrv>
 		<libs.itemMods>2.0.0-alpha.1</libs.itemMods>
 		<libs.llapi>1.7.4</libs.llapi>
 		<libs.mmoItems>6.9.4-SNAPSHOT</libs.mmoItems>
-		<libs.papi>2.11.3</libs.papi>
+		<libs.papi>2.11.6</libs.papi>
 	</properties>
 	
 	<build>
@@ -140,9 +141,9 @@
 			<url>https://repo.alessiodp.com/releases/</url>
 		</repository>
 		<repository>
-			<!-- Spigot repo -->
-			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+			<!-- PaperMC repo -->
+			<id>papermc-repo</id>
+			<url>https://repo.papermc.io/repository/maven-public/</url>
 		</repository>
 		<repository>
 			<!-- OSS Sonatype repo -->
@@ -170,7 +171,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
-			<artifactId>mockito-inline</artifactId>
+			<artifactId>mockito-core</artifactId>
 			<version>${dev.mockito}</version>
 			<scope>test</scope>
 		</dependency>
@@ -178,6 +179,12 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>${dev.junit}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.bytebuddy</groupId>
+			<artifactId>byte-buddy</artifactId>
+			<version>${dev.bytebuddy}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

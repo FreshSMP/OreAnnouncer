@@ -13,6 +13,7 @@ import com.alessiodp.oreannouncer.common.configuration.data.Messages;
 import com.alessiodp.oreannouncer.common.players.objects.OAPlayerImpl;
 import com.alessiodp.oreannouncer.common.utils.OreAnnouncerPermission;
 import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,7 +42,7 @@ public class CommandWhitelist extends OASubCommand {
 	}
 	
 	@Override
-	public boolean preRequisites(CommandData commandData) {
+	public boolean preRequisites(@NotNull CommandData commandData) {
 		return handlePreRequisitesWithPermission(commandData);
 	}
 	
@@ -86,21 +87,13 @@ public class CommandWhitelist extends OASubCommand {
 		}
 		
 		// Command starts
-		boolean toggledValue;
-		switch (commandType) {
-			case ADD:
-				toggledValue = true;
-				break;
-			case REMOVE:
-				toggledValue = false;
-				break;
-			case TOGGLE:
-			default:
-				toggledValue = !targetPlayer.isWhitelisted();
-				break;
-		}
-		
-		targetPlayer.setWhitelisted(toggledValue);
+		boolean toggledValue = switch (commandType) {
+            case ADD -> true;
+            case REMOVE -> false;
+            default -> !targetPlayer.isWhitelisted();
+        };
+
+        targetPlayer.setWhitelisted(toggledValue);
 		
 		if (toggledValue) {
 			sendMessage(sender, player, ((OreAnnouncerPlugin) plugin).getMessageUtils().convertPlayerPlaceholders(Messages.CMD_WHITELIST_ADDED, targetPlayer));

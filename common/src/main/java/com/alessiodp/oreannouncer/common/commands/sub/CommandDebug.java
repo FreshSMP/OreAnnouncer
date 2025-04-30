@@ -72,7 +72,6 @@ public class CommandDebug extends OASubCommand {
 				Messages.OREANNOUNCER_SYNTAX_PLAYER
 		);
 		
-		
 		description = Messages.HELP_CMD_DESCRIPTIONS_DEBUG;
 		help = Messages.HELP_CMD_DEBUG;
 	}
@@ -224,19 +223,17 @@ public class CommandDebug extends OASubCommand {
 					.setAlertAdmins(true)
 					.setLocation(getPlayerLocation(targetPlayer))
 					.setLightLevel(getPlayerLightLevel(targetPlayer));
-			
-			switch (alertType) {
-				case NORMAL:
-					((OreAnnouncerPlugin) plugin).getBlockManager().handleAlerts(blockData);
-					break;
-				case COUNT:
-					BlocksFoundResult bfr = new BlocksFoundResult(System.currentTimeMillis() / 1000L, number);
-					((OreAnnouncerPlugin) plugin).getBlockManager().handleFoundAlerts(blockData, bfr);
-					break;
-				default:
-					// Nothing
-					break;
-			}
+
+            switch (alertType) {
+                case NORMAL -> ((OreAnnouncerPlugin) plugin).getBlockManager().handleAlerts(blockData);
+                case COUNT -> {
+                    BlocksFoundResult bfr = new BlocksFoundResult(System.currentTimeMillis() / 1000L, number);
+                    ((OreAnnouncerPlugin) plugin).getBlockManager().handleFoundAlerts(blockData, bfr);
+                }
+                default -> {
+                }
+                // Nothing
+            }
 		} else if (commandType == CommandType.BLOCK) {
 			// Block
 			sendMessage(sender, player, Messages.CMD_DEBUG_BLOCK_HEADER);

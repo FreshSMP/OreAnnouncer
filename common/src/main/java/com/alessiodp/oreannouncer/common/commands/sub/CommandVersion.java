@@ -10,6 +10,7 @@ import com.alessiodp.oreannouncer.common.configuration.data.ConfigMain;
 import com.alessiodp.oreannouncer.common.utils.OreAnnouncerPermission;
 import com.alessiodp.oreannouncer.common.configuration.data.Messages;
 import com.alessiodp.oreannouncer.common.players.objects.OAPlayerImpl;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandVersion extends OASubCommand {
 	
@@ -30,12 +31,12 @@ public class CommandVersion extends OASubCommand {
 	}
 	
 	@Override
-	public String getRunCommand() {
+	public @NotNull String getRunCommand() {
 		return baseSyntax();
 	}
 	
 	@Override
-	public boolean preRequisites(CommandData commandData) {
+	public boolean preRequisites(@NotNull CommandData commandData) {
 		return handlePreRequisitesWithPermission(commandData);
 	}
 	

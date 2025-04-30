@@ -62,10 +62,10 @@ public abstract class PlayerManager {
 		if (uuid != null) {
 			ret = getCachePlayers().get(uuid);
 			if (ret != null) {
-				// Get player from online list
+				// Get player from the online list
 				plugin.getLoggerManager().logDebug(String.format(OAConstants.DEBUG_PLAYER_GET_LIST, ret.getName(), ret.getPlayerUUID()), true);
 			} else {
-				// Get player from database
+				// Get player from the database
 				ret = plugin.getDatabaseManager().getPlayer(uuid);
 				
 				// Load new player
